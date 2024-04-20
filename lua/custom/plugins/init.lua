@@ -9,6 +9,7 @@ return {
   'andyl/vim-projectionist-elixir',
 
   'tpope/vim-surround',
+  'tpope/vim-vinegar',
   {
     'kdheepak/lazygit.nvim',
     cmd = {
@@ -26,6 +27,32 @@ return {
     -- order to load the plugin when the command is run for the first time
     keys = {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
+    },
+  },
+  -- elixir
+  {
+    'elixir-tools/elixir-tools.nvim',
+    version = '*',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      local elixir = require 'elixir'
+      local elixirls = require 'elixir.elixirls'
+
+      elixir.setup {
+        nextls = { enable = false },
+        credo = { enable = true },
+        elixirls = {
+          enable = true,
+          settings = elixirls.settings {
+            dialyzerEnabled = true,
+            enableTestLenses = false,
+            suggestSpecs = true,
+          },
+        },
+      }
+    end,
+    dependencies = {
+      'nvim-lua/plenary.nvim',
     },
   },
 

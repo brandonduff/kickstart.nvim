@@ -92,7 +92,7 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
-vim.opt.guifont = 'FiraCode Nerd Font:h15'
+vim.opt.guifont = 'Hack Nerd Font:14'
 vim.opt.linespace = 8
 if vim.g.neovide then
   vim.g.neovide_input_macos_alt_is_meta = true
@@ -199,7 +199,6 @@ vim.keymap.set('t', '<C-g>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 vim.keymap.set('n', '<leader>q', ':q<cr>', { desc = '[Q]uit' })
 vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = '[W]rite' })
-vim.keymap.set('n', '<leader>h', ':noh<cr>', { desc = '[N]o [H]ighlight' })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -293,7 +292,7 @@ require('lazy').setup({
             gs.next_hunk()
           end)
           return '<Ignore>'
-        end, { expr = true })
+        end, { expr = true, desc = 'next hunk' })
 
         map('n', '[c', function()
           if vim.wo.diff then
@@ -303,30 +302,30 @@ require('lazy').setup({
             gs.prev_hunk()
           end)
           return '<Ignore>'
-        end, { expr = true })
+        end, { expr = true, desc = 'prev hunk' })
 
         -- Actions
-        map('n', '<leader>hs', gs.stage_hunk)
-        map('n', '<leader>hr', gs.reset_hunk)
+        map('n', '<leader>hs', gs.stage_hunk, { desc = 'stage hunk' })
+        map('n', '<leader>hr', gs.reset_hunk, { desc = 'reset hunk' })
         map('v', '<leader>hs', function()
           gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end)
         map('v', '<leader>hr', function()
           gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end)
-        map('n', '<leader>hS', gs.stage_buffer)
-        map('n', '<leader>hu', gs.undo_stage_hunk)
-        map('n', '<leader>hR', gs.reset_buffer)
-        map('n', '<leader>hp', gs.preview_hunk)
+        map('n', '<leader>hS', gs.stage_buffer, { desc = 'stage buffer' })
+        map('n', '<leader>hu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+        map('n', '<leader>hR', gs.reset_buffer, { desc = 'reset buffer' })
+        map('n', '<leader>hp', gs.preview_hunk, { desc = 'preview hunk' })
         map('n', '<leader>hb', function()
           gs.blame_line { full = true }
-        end)
-        map('n', '<leader>tb', gs.toggle_current_line_blame)
-        map('n', '<leader>hd', gs.diffthis)
+        end, { desc = 'blame line' })
+        map('n', '<leader>tb', gs.toggle_current_line_blame, { desc = 'toggle current line blame' })
+        map('n', '<leader>hd', gs.diffthis, { desc = 'diff this' })
         map('n', '<leader>hD', function()
           gs.diffthis '~'
-        end)
-        map('n', '<leader>td', gs.toggle_deleted)
+        end, { desc = 'diff this' })
+        map('n', '<leader>td', gs.toggle_deleted, { desc = 'toggle deleted' })
 
         -- Text object
         map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
@@ -428,7 +427,7 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
-        -- pickers = {}
+        pickers = { find_files = { hidden = true } },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -959,6 +958,12 @@ vim.api.nvim_create_user_command('Cppath', function()
 end, {})
 
 vim.keymap.set('n', '<C-c><C-f>', ':Cppath<cr>')
-vim.keymap.set('n', '<leader>ss', ':e ~/Desktop/scratch.md<cr>')
+vim.keymap.set('n', '<Leader>SS', ':e ~/Desktop/scratch.md<cr>')
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, { pattern = { '*.livemd' }, command = 'set filetype=markdown' })
+
+-- ToggleTerm
+vim.keymap.set('n', '<Leader>tl', ':ToggleTermSendCurrentLine<cr>')
+vim.keymap.set('v', '<Leader>ts', ':ToggleTermSendVisualLines<cr>')
+-- autocmd BufNewFile,BufRead *.ini setfiletype dosini
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
