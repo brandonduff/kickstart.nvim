@@ -92,10 +92,11 @@ vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed
 vim.g.have_nerd_font = true
-vim.opt.guifont = 'Hack Nerd Font:14'
+vim.opt.guifont = 'Hack Nerd Font:12'
 vim.opt.linespace = 8
 if vim.g.neovide then
-  vim.g.neovide_input_macos_alt_is_meta = true
+  vim.g.neovide_input_macos_option_key_is_meta = true
+  vim.g.neovide_cursor_animation_length = 0
   vim.keymap.set('n', '<D-s>', ':w<CR>') -- Save
   vim.keymap.set('v', '<D-c>', '"+y') -- Copy
   vim.keymap.set('n', '<D-v>', '"+P') -- Paste normal mode
@@ -184,8 +185,8 @@ vim.opt.confirm = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+-- vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+-- vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
@@ -740,6 +741,7 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
       local servers = {
         -- clangd = {},
         -- gopls = {},
@@ -750,7 +752,8 @@ require('lazy').setup({
         -- Some languages (like typescript) have entire language plugins that can be useful:
         --    https://github.com/pmizio/typescript-tools.nvim
         --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
+        -- But for
+        -- many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
 
@@ -1115,3 +1118,10 @@ vim.keymap.set('v', '<Leader>ts', ':ToggleTermSendVisualLines<cr>')
 -- autocmd BufNewFile,BufRead *.ini setfiletype dosini
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+
+vim.lsp.config['ruby_lsp'] = {
+  init_options = {
+    formatter = 'standard',
+    linters = { 'standard' },
+  },
+}
