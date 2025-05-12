@@ -1118,10 +1118,13 @@ vim.keymap.set('v', '<Leader>ts', ':ToggleTermSendVisualLines<cr>')
 -- autocmd BufNewFile,BufRead *.ini setfiletype dosini
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
-
+--
 vim.lsp.config['ruby_lsp'] = {
   init_options = {
     formatter = 'standard',
     linters = { 'standard' },
   },
 }
+
+-- Neogit
+vim.keymap.set('n', '<Leader>n', ':Neogit <cr>')
