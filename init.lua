@@ -756,6 +756,7 @@ require('lazy').setup({
         -- many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        elixirls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -1127,4 +1128,18 @@ vim.lsp.config['ruby_lsp'] = {
 }
 
 -- Neogit
-vim.keymap.set('n', '<Leader>n', ':Neogit <cr>')
+vim.keymap.set('n', '<Leader>G', ':Neogit <cr>')
+
+-- copy paths (taken from Justin)
+function InsertFullPath()
+  local filepath = vim.fn.expand '%'
+  vim.fn.setreg('+', filepath) -- write to clippoard
+end
+
+function InsertRelativePath()
+  local filepath = vim.fn.expand '%:.'
+  vim.fn.setreg('+', filepath) -- write to clippoard
+end
+
+vim.keymap.set('n', '<leader>dp', InsertFullPath, { desc = 'copy [d]ocument [p]ath', noremap = true, silent = true })
+vim.keymap.set('n', '<leader>dr', InsertRelativePath, { desc = 'copy [d]ocument [r]elative path', noremap = true, silent = false })
