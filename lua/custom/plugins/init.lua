@@ -155,4 +155,15 @@ return {
       hl(0, 'MultiCursorDisabledSign', { link = 'SignColumn' })
     end,
   },
+  {
+    'brandonduff/refactorex.nvim',
+    branch = 'fixes-for-nvim-11',
+    ft = 'elixir',
+    ---@module "refactorex.nvim"
+    ---@type refactorex.Config
+    opts = {
+      auto_update = true,
+      pin_version = nil,
+    },
+  },
 }
