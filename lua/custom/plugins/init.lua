@@ -29,8 +29,15 @@ return {
       { '<leader>lg', '<cmd>LazyGit<cr>', desc = 'LazyGit' },
     },
   },
+  {
+    'ray-x/go.nvim',
+    config = function()
+      require('go').setup {}
+    end,
+  },
   -- neotest
   'jfpedroza/neotest-elixir',
+  'fredrikaverpil/neotest-golang',
   'nvim-neotest/nvim-nio',
   {
     'nvim-neotest/neotest',
@@ -38,6 +45,7 @@ return {
       require('neotest').setup {
         adapters = {
           require 'neotest-elixir',
+          require 'neotest-golang',
         },
       }
     end,
@@ -167,18 +175,21 @@ return {
     },
   },
   {
-    'azorng/goose.nvim',
-    config = function()
-      require('goose').setup {}
-    end,
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        'MeanderingProgrammer/render-markdown.nvim',
-        opts = {
-          anti_conceal = { enabled = false },
-        },
-      },
+    'christoomey/vim-tmux-navigator',
+    cmd = {
+      'TmuxNavigateLeft',
+      'TmuxNavigateDown',
+      'TmuxNavigateUp',
+      'TmuxNavigateRight',
+      'TmuxNavigatePrevious',
+      'TmuxNavigatorProcessList',
+    },
+    keys = {
+      { '<c-h>', '<cmd><C-U>TmuxNavigateLeft<cr>' },
+      { '<c-j>', '<cmd><C-U>TmuxNavigateDown<cr>' },
+      { '<c-k>', '<cmd><C-U>TmuxNavigateUp<cr>' },
+      { '<c-l>', '<cmd><C-U>TmuxNavigateRight<cr>' },
+      { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
   },
 }
