@@ -1144,3 +1144,4 @@ end
 vim.keymap.set('n', '<leader>dp', InsertFullPath, { desc = 'copy [d]ocument [p]ath', noremap = true, silent = true })
 vim.keymap.set('n', '<leader>dr', InsertRelativePath, { desc = 'copy [d]ocument [r]elative path', noremap = true, silent = false })
 vim.opt.tabstop = 4
+vim.keymap.set('n', '<F5>', ':VimuxRunLastCommand<cr>', { desc = 'Run last Vimux command' })

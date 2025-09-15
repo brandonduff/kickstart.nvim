@@ -192,4 +192,6 @@ return {
       { '<c-\\>', '<cmd><C-U>TmuxNavigatePrevious<cr>' },
     },
   },
+  'tpope/vim-dispatch',
+  'preservim/vimux',
 }
