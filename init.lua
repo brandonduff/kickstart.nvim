@@ -456,7 +456,6 @@ require('lazy').setup({
       -- Telescope is a fuzzy finder that comes with a lot of different things that
       -- it can fuzzy find! It's more than just a "file finder", it can search
       -- many different aspects of Neovim, your workspace, LSP, and more!
-      --
       -- The easiest way to use Telescope, is to start by doing something like:
       --  :Telescope help_tags
       --
@@ -757,6 +756,8 @@ require('lazy').setup({
         -- ts_ls = {},
         --
         elixirls = {},
+        gh_actions_ls = {},
+        -- nil_ls = {},
 
         lua_ls = {
           -- cmd = { ... },
@@ -1145,3 +1146,5 @@ vim.keymap.set('n', '<leader>dp', InsertFullPath, { desc = 'copy [d]ocument [p]a
 vim.keymap.set('n', '<leader>dr', InsertRelativePath, { desc = 'copy [d]ocument [r]elative path', noremap = true, silent = false })
 vim.opt.tabstop = 4
 vim.keymap.set('n', '<F5>', ':VimuxRunLastCommand<cr>', { desc = 'Run last Vimux command' })
+
+vim.lsp.enable 'nil_ls'
